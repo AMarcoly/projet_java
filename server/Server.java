@@ -16,6 +16,14 @@ public class Server {
     private Random randomFailure;
     private Logger logger;
     private final Set<Socket> activeConnections = ConcurrentHashMap.newKeySet();
+    // Métriques
+    private AtomicInteger totalRequests = new AtomicInteger(0);
+    private AtomicInteger successfulDelegations = new AtomicInteger(0);
+    private AtomicInteger failedDelegations = new AtomicInteger(0);
+    private AtomicInteger forcedClosures = new AtomicInteger(0);
+    private static final String METRICS_FILE = "./logs/server_metrics.log";
+    private static final String LOG_FILE = "./logs/server.log";
+
 
     public Server(String[] args) {
         // 1. Initialisez d'abord le logger
@@ -39,8 +47,31 @@ public class Server {
                 this.capacityCs = Integer.parseInt(arg.substring(5));
             }
         }
+        setupMetricsLogger();
+        setupLogger();
     }
 
+    private void setupLogger(){
+        try {
+            FileHandler fileHandler = new FileHandler(LOG_FILE, true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            logger.info("Server logger initialized.");
+        } catch (IOException e) {
+            logger.severe("Failed to initialize server logger: " + e.getMessage());
+        }
+    }
+
+    private void setupMetricsLogger(){
+        try {
+            FileHandler fileHandler = new FileHandler(METRICS_FILE, true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            logger.info("Metrics logger initialized.");
+        } catch (IOException e) {
+            logger.severe("Failed to initialize metrics logger: " + e.getMessage());
+        }
+    }
 
 
     public void start() {
@@ -204,6 +235,8 @@ public class Server {
     }
 
     private boolean tryDelegateRequest(Request request) {
+        totalRequests.incrementAndGet();
+        logger.info("Attempting to delegate request for file: " + request.getRequestedFile() + ", block: " + request.getBlockId());
         if (request.getRequestedFile() == null || request.getBlockId() < 0) {
             logger.warning("Invalid request for delegation");
             return false;
@@ -212,8 +245,15 @@ public class Server {
         List<ClientInfo> helpers = trustedClients.get(request.getRequestedFile());
         if (helpers == null || helpers.isEmpty()) {
             logger.info("No trusted clients available for delegation.");
+            failedDelegations.incrementAndGet();
+            logger.info("Delegation failed. No trusted clients available.");
+            logMetrics();
             return false;
         }
+
+        logger.info("Trusted clients available for delegation: " + helpers.size());
+        successfulDelegations.incrementAndGet();
+        logMetrics();
     
         // Shuffle helpers to distribute load
         Collections.shuffle(helpers);
@@ -226,6 +266,18 @@ public class Server {
         return false;
     }
 
+    private synchronized void logMetrics() {
+        try (FileWriter fw = new FileWriter(METRICS_FILE, true)) {
+            fw.write("Total Requests: " + totalRequests.get() + "\n");
+            fw.write("Successful Delegations: " + successfulDelegations.get() + "\n");
+            fw.write("Failed Delegations: " + failedDelegations.get() + "\n");
+            fw.write("Forced Closures: " + forcedClosures.get() + "\n");
+            fw.write("Active Connections: " + activeConnections.size() + "\n\n");
+        } catch (IOException e) {
+            logger.warning("Error logging metrics: " + e.getMessage());
+        }
+    }
+    
     private boolean contactTrustedClient(ClientInfo helper, Request request) {
         try (Socket socket = new Socket(helper.getIp(), helper.getPort());
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());

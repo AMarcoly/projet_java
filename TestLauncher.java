@@ -161,6 +161,15 @@ public class TestLauncher {
         }
 
         System.out.println();
+
+        try {
+            String metrics = Files.readString(Paths.get("./logs/server_metrics.log"));
+            System.out.println("\n=== METRICS ===");
+            System.out.println(metrics);
+        } catch (IOException e) {
+            System.out.println("Failed to read metrics: " + e.getMessage());
+        }
+        
     }
 
     private static boolean verifyDownload(String fileName) {
@@ -193,8 +202,10 @@ public class TestLauncher {
             
             return serverMd5.equals(clientMd5);
         } catch (Exception e) {
-            System.out.println("❌ Verification failed: " + e.getMessage());
+            System.out.println(" Verification failed: " + e.getMessage());
             return false;
         }
     }
+
+   
 }
