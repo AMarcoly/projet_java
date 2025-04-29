@@ -17,15 +17,31 @@ public class Server {
     private Logger logger;
     private final Set<Socket> activeConnections = ConcurrentHashMap.newKeySet();
 
-    public Server(int port, int capacityCs) {
-        this.port = port;
-        this.capacityCs = capacityCs;
+    public Server(String[] args) {
+        // 1. Initialisez d'abord le logger
+        this.logger = Logger.getLogger(Server.class.getName());
+        
+        // 2. Initialisez tous les membres
+        this.randomFailure = new Random();  // <-- Ajoutez cette ligne
         this.trustedClients = new ConcurrentHashMap<>();
         this.queue = new LinkedBlockingQueue<>();
         this.activeRequests = new AtomicInteger(0);
-        this.randomFailure = new Random();
-        this.logger = Logger.getLogger(Server.class.getName());
+        
+        // 3. Traitez les arguments
+        this.port = 5000; // Valeur par défaut
+        this.capacityCs = 2; // Valeur par défaut
+        
+        for (String arg : args) {
+            if (arg.startsWith("--port=")) {
+                this.port = Integer.parseInt(arg.substring(7));
+            }
+            else if (arg.startsWith("--cs=")) {
+                this.capacityCs = Integer.parseInt(arg.substring(5));
+            }
+        }
     }
+
+
 
     public void start() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
@@ -136,17 +152,19 @@ public class Server {
     }
 
     private void monitorConnections() {
-        while (true) {
-            try {
+        try {
+            while (true) {
                 Thread.sleep(5000);
-                if (randomFailure.nextDouble() < 0.2) {
-                    closeRandomConnection();
+                // Vérification de sécurité
+                if (randomFailure != null && activeConnections != null && !activeConnections.isEmpty()) {
+                    if (randomFailure.nextDouble() < 0.2) {
+                        closeRandomConnection();
+                    }
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                logger.warning("Monitor thread interrupted");
-                break;
             }
+        } catch (InterruptedException e) {
+            logger.warning("Monitor thread interrupted");
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -207,7 +225,7 @@ public class Server {
         }
         return false;
     }
-    
+
     private boolean contactTrustedClient(ClientInfo helper, Request request) {
         try (Socket socket = new Socket(helper.getIp(), helper.getPort());
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -233,5 +251,10 @@ public class Server {
             logger.warning("Failed to delegate to trusted client: " + e.getMessage());
             return false;
         }
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server(args);
+        server.start();
     }
 }

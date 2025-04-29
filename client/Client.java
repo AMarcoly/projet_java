@@ -17,13 +17,28 @@ public class Client {
     private TrustedHelper trustedHelper;
     private Logger logger;
 
-    public Client(String serverAddress, int serverPort, String fileId, int Dc) {
+    public Client(String[] args) {
+        this.serverAddress = "127.0.0.1"; // Valeur par défaut
+        this.serverPort = 5000;
+        this.fileId = "file1.txt";
+        this.Dc = 2;
         this.logger = Logger.getLogger(Client.class.getName());
-        this.serverAddress = serverAddress;
-        this.serverPort = serverPort;
-        this.fileId = fileId;
-        this.Dc = Dc;
         this.blocksReceived = new ConcurrentHashMap<>();
+
+        // Parser les arguments
+        for (String arg : args) {
+            if (arg.startsWith("--server=")) {
+                String[] parts = arg.substring(9).split(":");
+                this.serverAddress = parts[0];
+                if (parts.length > 1) this.serverPort = Integer.parseInt(parts[1]);
+            }
+            else if (arg.startsWith("--file=")) {
+                this.fileId = arg.substring(7);
+            }
+            else if (arg.startsWith("--dc=")) {
+                this.Dc = Integer.parseInt(arg.substring(5));
+            }
+        }
     }
 
     public void connect() {
@@ -184,24 +199,24 @@ public class Client {
     private void assembleFile() {
         try {
             File outputDir = new File("./client_files/");
-            if (!outputDir.exists()) {
-                outputDir.mkdirs();
-            }
-
+            if (!outputDir.exists()) outputDir.mkdirs();
+            
             File outputFile = new File(outputDir, fileId);
             try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-                List<Integer> sortedKeys = new ArrayList<>(blocksReceived.keySet());
-                Collections.sort(sortedKeys);
-                for (int key : sortedKeys) {
-                    fos.write(blocksReceived.get(key));
-                }
+                // Trier les blocs par ID avant assemblage
+                blocksReceived.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> {
+                        try {
+                            fos.write(entry.getValue());
+                        } catch (IOException e) {
+                            logger.severe("Error writing block " + entry.getKey());
+                        }
+                    });
             }
-
-            logger.info("File assembled successfully at: " + outputFile.getAbsolutePath());
-            logger.info("Number of blocks assembled: " + blocksReceived.size());
-
+            logger.info("File assembled. Total blocks: " + blocksReceived.size());
         } catch (IOException e) {
-            logger.severe("Error assembling file: " + e.getMessage());
+            logger.severe("File assembly failed: " + e.getMessage());
         }
     }
 
@@ -234,5 +249,11 @@ public class Client {
         this.trustedHelper = new TrustedHelper(0, 0.8);
         trustedHelper.start();
         logger.info("Client ready to help others as TrustedHelper on port " + trustedHelper.getListeningPort());
+    }
+
+    // Méthode main
+    public static void main(String[] args) {
+        Client client = new Client(args);
+        client.connect();
     }
 }
