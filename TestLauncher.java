@@ -10,16 +10,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-
-
 public class TestLauncher {
+
+    private static final int PORT_END_TO_END = 5000;
+    private static final int PORT_DELEGATION = 5001;
 
     public static void main(String[] args) {
         System.out.println("=== Starting Tests ===");
 
         testUtils();
-        testServer();
-        testClient();
+        testServerAndClientEndToEnd();
+        testDelegationScenario();
 
         System.out.println("=== Tests Finished ===");
     }
@@ -45,65 +46,21 @@ public class TestLauncher {
         System.out.println();
     }
 
-    private static void testServer() {
-        System.out.println(">> Testing Server");
-
-        try {
-            Thread serverThread = new Thread(() -> {
-                Server server = new Server(5000, 2); // port 5000, capacité 2 connexions simultanées
-                server.start();
-            });
-
-            serverThread.start();
-            Thread.sleep(1000); // attendre que le serveur démarre correctement
-
-            System.out.println("✅ Server started successfully (manual verification needed)");
-
-        } catch (Exception e) {
-            System.out.println("❌ Server start failed: " + e.getMessage());
-        }
-
-        System.out.println();
-    }
-
-    private static void testClient() {
-        System.out.println(">> Testing Client");
-
-        try {
-            Thread clientThread = new Thread(() -> {
-                Client client = new Client("127.0.0.1", 5000, "file1.txt", 2); // Teste la connexion
-                client.connect();
-            });
-
-            clientThread.start();
-            clientThread.join(); // attendre que le client termine
-
-            System.out.println("✅ Client connected and operated successfully (manual verification needed)");
-
-        } catch (Exception e) {
-            System.out.println("❌ Client test failed: " + e.getMessage());
-        }
-
-        System.out.println();
-    }
-
     private static void testServerAndClientEndToEnd() {
         System.out.println(">> Testing End-to-End Server-Client");
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
         try {
-            // 1. Lancer le serveur
             executor.submit(() -> {
-                Server server = new Server(5000, 2); // port 5000, 2 connexions simultanées
+                Server server = new Server(PORT_END_TO_END, 2);
                 server.start();
             });
 
-            Thread.sleep(1000); // attendre que le serveur soit bien démarré
+            Thread.sleep(1000);
 
-            // 2. Lancer le client
             Future<Boolean> clientResult = executor.submit(() -> {
-                Client client = new Client("127.0.0.1", 5000, "file1.txt", 2);
+                Client client = new Client("127.0.0.1", PORT_END_TO_END, "file1.txt", 2);
                 client.connect();
                 return verifyDownload("file1.txt");
             });
@@ -119,7 +76,57 @@ public class TestLauncher {
         } catch (Exception e) {
             System.out.println("❌ End-to-End test error: " + e.getMessage());
         } finally {
-            executor.shutdownNow(); // Arrêter tous les threads (serveur + client)
+            executor.shutdownNow();
+        }
+
+        System.out.println();
+    }
+
+    private static void testDelegationScenario() {
+        System.out.println(">> Testing Delegation Scenario");
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        try {
+            executor.submit(() -> {
+                Server server = new Server(PORT_DELEGATION, 2); // capacityCs = 2 ici
+                server.start();
+            });
+
+            Thread.sleep(1000);
+
+            executor.submit(() -> {
+                Client clientHelper = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
+                clientHelper.connect();
+            });
+
+            Thread.sleep(3000);
+
+            Future<Boolean> client1Result = executor.submit(() -> {
+                Client client1 = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
+                client1.connect();
+                return verifyDownload("file1.txt");
+            });
+
+            Future<Boolean> client2Result = executor.submit(() -> {
+                Client client2 = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
+                client2.connect();
+                return verifyDownload("file1.txt");
+            });
+
+            boolean success1 = client1Result.get(5, TimeUnit.MINUTES);
+            boolean success2 = client2Result.get(5, TimeUnit.MINUTES);
+
+            if (success1 && success2) {
+                System.out.println("✅ Delegation Test Passed: All clients received correct files");
+            } else {
+                System.out.println("❌ Delegation Test Failed: At least one client has incorrect file");
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Delegation Test Error: " + e.getMessage());
+        } finally {
+            executor.shutdownNow();
         }
 
         System.out.println();
@@ -150,23 +157,14 @@ public class TestLauncher {
             return false;
         }
     }
-
-    private static void cleanUp() {
-        // Supprimer les fichiers de test après les tests
-        File serverDir = new File("./server_files/");
-        File clientDir = new File("./client_files/");
-
-        if (serverDir.exists()) {
-            for (File file : serverDir.listFiles()) {
-                file.delete();
-            }
-        }
-
-        if (clientDir.exists()) {
-            for (File file : clientDir.listFiles()) {
-                file.delete();
-            }
-        }
-        System.out.println(">> Cleaned up test files");
-    }
 }
+    //     int randomIndex = (int) (Math.random() * connections.size());
+    //     Socket connection = connections.get(randomIndex);
+    //     try {
+    //         connection.close();
+    //         connections.remove(randomIndex);
+    //         logger.info("Closed random connection: " + connection.getInetAddress());
+    //     } catch (IOException e) {
+    //         logger.warning("Error closing connection: " + e.getMessage());
+    //     }
+    // }

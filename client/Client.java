@@ -18,85 +18,194 @@ public class Client {
     private Logger logger;
 
     public Client(String serverAddress, int serverPort, String fileId, int Dc) {
-        // Initialisation des attributs
+        this.logger = Logger.getLogger(Client.class.getName());
+        this.serverAddress = serverAddress;
+        this.serverPort = serverPort;
+        this.fileId = fileId;
+        this.Dc = Dc;
+        this.blocksReceived = new ConcurrentHashMap<>();
     }
 
     public void connect() {
-        // Connexion au serveur et lancement des téléchargements
+        try {
+            requestFileList();
 
+            ExecutorService executor = Executors.newFixedThreadPool(Dc);
 
-        sendMD5();
-        assembleFile();
-        offerHelp();
+            for (int i = 0; i < Dc; i++) {
+                int blockId = i;
+                executor.submit(() -> downloadBlock(blockId));
+            }
+
+            executor.shutdown();
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+
+            logger.info("All downloads finished. Blocks received: " + blocksReceived.size());
+
+            assembleFile();
+            sendMD5();
+            offerHelp();
+            registerAsHelper();
+
+        } catch (Exception e) {
+            logger.severe("Client connection error: " + e.getMessage());
+        }
     }
 
+    private void registerAsHelper() {
+        try (Socket socket = new Socket(serverAddress, serverPort);
+             DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
+    
+            String localIp = InetAddress.getLocalHost().getHostAddress();
+            int helperPort = trustedHelper.getListeningPort();
+    
+            out.writeUTF("REGISTER_HELPER " + fileId + " " + localIp + " " + helperPort);
+            logger.info("Registered as TrustedHelper: " + localIp + ":" + helperPort);
+    
+        } catch (IOException e) {
+            logger.warning("Failed to register helper: " + e.getMessage());
+        }
+    }
+    
+
     private void requestFileList() {
-        // Demander la liste des fichiers
+        try (Socket socket = new Socket(serverAddress, serverPort);
+             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+             DataInputStream in = new DataInputStream(socket.getInputStream())) {
+
+            out.writeUTF("LIST");
+            String response = in.readUTF();
+            logger.info("Available files: " + response);
+
+        } catch (IOException e) {
+            logger.warning("Error requesting file list: " + e.getMessage());
+        }
     }
 
     private void downloadBlock(int blockId) {
-        try (
-            Socket socket = new Socket(serverAddress, serverPort);
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream())
-        ) {
+        try (Socket socket = new Socket(serverAddress, serverPort);
+             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+             DataInputStream in = new DataInputStream(socket.getInputStream())) {
+
             out.writeUTF("BLOCK " + fileId + " " + blockId);
-    
-            int blockSize = in.readInt(); // Taille réelle reçue
-            if (blockSize > 0) {
-                byte[] blockData = new byte[blockSize];
-                in.readFully(blockData);
-    
-                blocksReceived.put(blockId, blockData);
-                logger.info("Downloaded block " + blockId + " (" + blockSize + " bytes)");
+
+            String response = in.readUTF();
+            if (response.startsWith("DELEGATED")) {
+                String[] parts = response.split(" ");
+                String helperIp = parts[1];
+                int helperPort = Integer.parseInt(parts[2]);
+                String token = parts[3];
+
+                logger.info("Delegated download received. Contacting helper...");
+                downloadBlockFromHelper(helperIp, helperPort, token, blockId);
+                return;
+            } else if (response.equals("OK")) {
+                int blockSize = in.readInt();
+                if (blockSize > 0) {
+                    byte[] blockData = new byte[blockSize];
+                    in.readFully(blockData);
+                    blocksReceived.put(blockId, blockData);
+                    logger.info("Downloaded block " + blockId + " from server (" + blockSize + " bytes)");
+                } else {
+                    logger.warning("Empty block received for " + blockId);
+                }
+            } else if (response.equals("FAILURE")) {
+                logger.warning("Server delegation failed, retrying block " + blockId);
+                retryDownloadBlock(blockId);
+                return;
             } else {
-                logger.warning("Received empty block or file missing: blockId=" + blockId);
+                logger.warning("Unknown server response: " + response);
             }
+
         } catch (IOException e) {
             logger.warning("Error downloading block " + blockId + ": " + e.getMessage());
         }
     }
-    
+
+    private void retryDownloadBlock(int blockId) {
+        try {
+            Thread.sleep(1000);
+            downloadBlock(blockId);
+        } catch (InterruptedException e) {
+            logger.warning("Retry interrupted for block " + blockId);
+        }
+    }
+
+    private void downloadBlockFromHelper(String ip, int port, String token, int blockId) {
+        try (Socket socket = new Socket(ip, port);
+             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+             DataInputStream in = new DataInputStream(socket.getInputStream())) {
+
+            out.writeUTF("TOKEN " + token);
+            out.writeUTF("BLOCK " + fileId + " " + blockId);
+
+            int blockSize = in.readInt();
+            if (blockSize > 0) {
+                byte[] blockData = new byte[blockSize];
+                in.readFully(blockData);
+                blocksReceived.put(blockId, blockData);
+                logger.info("Downloaded block " + blockId + " from helper (" + blockSize + " bytes)");
+            } else {
+                logger.warning("Empty block received from helper for block " + blockId);
+            }
+
+        } catch (IOException e) {
+            logger.warning("Error contacting helper for block " + blockId + ": " + e.getMessage());
+        }
+    }
+
     private void assembleFile() {
         try {
-            // Créer un fichier de sortie (par exemple, dans ./client_files/)
             File outputDir = new File("./client_files/");
             if (!outputDir.exists()) {
-                outputDir.mkdirs(); // Crée le dossier s'il n'existe pas
+                outputDir.mkdirs();
             }
-    
+
             File outputFile = new File(outputDir, fileId);
             try (FileOutputStream fos = new FileOutputStream(outputFile)) {
                 List<Integer> sortedKeys = new ArrayList<>(blocksReceived.keySet());
-                Collections.sort(sortedKeys); // Très important : assembler dans l'ordre des blocs !
-    
-                for (int blockId : sortedKeys) {
-                    byte[] blockData = blocksReceived.get(blockId);
-                    fos.write(blockData);
+                Collections.sort(sortedKeys);
+                for (int key : sortedKeys) {
+                    fos.write(blocksReceived.get(key));
                 }
             }
-    
+
             logger.info("File assembled successfully at: " + outputFile.getAbsolutePath());
+            logger.info("Number of blocks assembled: " + blocksReceived.size());
+
         } catch (IOException e) {
             logger.severe("Error assembling file: " + e.getMessage());
         }
     }
-    
 
     private void sendMD5() {
-        // Envoyer le hash MD5 pour vérification
+        try {
+            List<Integer> sortedKeys = new ArrayList<>(blocksReceived.keySet());
+            Collections.sort(sortedKeys);
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            for (int key : sortedKeys) {
+                md.update(blocksReceived.get(key));
+            }
+
+            byte[] digest = md.digest();
+            String md5Hex = Utils.bytesToHex(digest);
+
+            try (Socket socket = new Socket(serverAddress, serverPort);
+                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+                out.println("MD5 " + fileId + " " + md5Hex);
+            }
+
+            logger.info("MD5 sent: " + md5Hex);
+
+        } catch (Exception e) {
+            logger.severe("Error computing or sending MD5: " + e.getMessage());
+        }
     }
 
     public void offerHelp() {
-        // Devenir un trusted helper
-    }
-
-    public void acceptHelpRequest(Token token) {
-        // Accepter de l'aide d'un autre client
-    }
-
-    private String bytesToHex(byte[] bytes) {
-        // Convertir un tableau d'octets en hexadécimal
-        return null;
+        this.trustedHelper = new TrustedHelper(0, 0.8);
+        trustedHelper.start();
+        logger.info("Client ready to help others as TrustedHelper on port " + trustedHelper.getListeningPort());
     }
 }
