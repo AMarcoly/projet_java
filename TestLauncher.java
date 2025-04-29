@@ -82,55 +82,68 @@ public class TestLauncher {
         System.out.println();
     }
 
+
     private static void testDelegationScenario() {
         System.out.println(">> Testing Delegation Scenario");
-
+    
+        // Increase thread pool size to accommodate all clients
         ExecutorService executor = Executors.newFixedThreadPool(5);
-
+    
         try {
+            // Start server first
             executor.submit(() -> {
-                Server server = new Server(PORT_DELEGATION, 2); // capacityCs = 2 ici
+                Server server = new Server(PORT_DELEGATION, 3); // capacityCs = 2
                 server.start();
             });
-
-            Thread.sleep(1000);
-
+    
+            // Wait longer for server to start
+            Thread.sleep(2000);
+    
+            // Start helper client first
             executor.submit(() -> {
                 Client clientHelper = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
                 clientHelper.connect();
             });
-
+    
+            // Wait for helper to register
             Thread.sleep(3000);
-
+    
+            // Start first regular client with delay
             Future<Boolean> client1Result = executor.submit(() -> {
+                Thread.sleep(500); // Initial delay
                 Client client1 = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
                 client1.connect();
                 return verifyDownload("file1.txt");
             });
-
+    
+            // Start second regular client with longer delay
             Future<Boolean> client2Result = executor.submit(() -> {
+                Thread.sleep(1000); // Longer delay
                 Client client2 = new Client("127.0.0.1", PORT_DELEGATION, "file1.txt", 2);
                 client2.connect();
                 return verifyDownload("file1.txt");
             });
-
+    
+            // Wait for results with timeout
             boolean success1 = client1Result.get(5, TimeUnit.MINUTES);
             boolean success2 = client2Result.get(5, TimeUnit.MINUTES);
-
+    
             if (success1 && success2) {
                 System.out.println("✅ Delegation Test Passed: All clients received correct files");
             } else {
                 System.out.println("❌ Delegation Test Failed: At least one client has incorrect file");
             }
-
+    
         } catch (Exception e) {
             System.out.println("❌ Delegation Test Error: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             executor.shutdownNow();
         }
-
+    
         System.out.println();
     }
+ 
 
     private static boolean verifyDownload(String fileName) {
         try {

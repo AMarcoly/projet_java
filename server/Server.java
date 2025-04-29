@@ -186,21 +186,28 @@ public class Server {
     }
 
     private boolean tryDelegateRequest(Request request) {
+        if (request.getRequestedFile() == null || request.getBlockId() < 0) {
+            logger.warning("Invalid request for delegation");
+            return false;
+        }
+    
         List<ClientInfo> helpers = trustedClients.get(request.getRequestedFile());
         if (helpers == null || helpers.isEmpty()) {
             logger.info("No trusted clients available for delegation.");
             return false;
         }
-
+    
+        // Shuffle helpers to distribute load
+        Collections.shuffle(helpers);
+        
         for (ClientInfo helper : helpers) {
             if (contactTrustedClient(helper, request)) {
-                logger.info("Delegated request to trusted client: " + helper.getIp() + ":" + helper.getPort());
                 return true;
             }
         }
         return false;
     }
-
+    
     private boolean contactTrustedClient(ClientInfo helper, Request request) {
         try (Socket socket = new Socket(helper.getIp(), helper.getPort());
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());

@@ -29,34 +29,48 @@ public class Client {
     public void connect() {
         try {
             requestFileList();
-
+    
             ExecutorService executor = Executors.newFixedThreadPool(Dc);
-
+    
             for (int i = 0; i < Dc; i++) {
                 int blockId = i;
                 executor.submit(() -> downloadBlock(blockId));
             }
-
+    
             executor.shutdown();
             executor.awaitTermination(10, TimeUnit.MINUTES);
-
+    
             logger.info("All downloads finished. Blocks received: " + blocksReceived.size());
-
+    
             assembleFile();
             sendMD5();
+    
             offerHelp();
-            registerAsHelper();
-
+    
+            // Attendre que le TrustedHelper démarre et attribue son port
+            int attempts = 0;
+            while (trustedHelper.getListeningPort() == 0 && attempts < 10) {
+                Thread.sleep(500);
+                attempts++;
+            }
+    
+            if (trustedHelper.getListeningPort() == 0) {
+                logger.warning("Failed to start TrustedHelper after waiting.");
+            } else {
+                registerAsHelper();
+            }
+    
         } catch (Exception e) {
             logger.severe("Client connection error: " + e.getMessage());
         }
     }
+    
 
     private void registerAsHelper() {
         try (Socket socket = new Socket(serverAddress, serverPort);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
     
-            String localIp = InetAddress.getLocalHost().getHostAddress();
+            String localIp = "127.0.0.1"; //InetAddress.getLocalHost().getHostAddress();
             int helperPort = trustedHelper.getListeningPort();
     
             out.writeUTF("REGISTER_HELPER " + fileId + " " + localIp + " " + helperPort);
@@ -81,45 +95,58 @@ public class Client {
             logger.warning("Error requesting file list: " + e.getMessage());
         }
     }
-
     private void downloadBlock(int blockId) {
-        try (Socket socket = new Socket(serverAddress, serverPort);
-             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-             DataInputStream in = new DataInputStream(socket.getInputStream())) {
-
-            out.writeUTF("BLOCK " + fileId + " " + blockId);
-
-            String response = in.readUTF();
-            if (response.startsWith("DELEGATED")) {
-                String[] parts = response.split(" ");
-                String helperIp = parts[1];
-                int helperPort = Integer.parseInt(parts[2]);
-                String token = parts[3];
-
-                logger.info("Delegated download received. Contacting helper...");
-                downloadBlockFromHelper(helperIp, helperPort, token, blockId);
-                return;
-            } else if (response.equals("OK")) {
-                int blockSize = in.readInt();
-                if (blockSize > 0) {
-                    byte[] blockData = new byte[blockSize];
-                    in.readFully(blockData);
-                    blocksReceived.put(blockId, blockData);
-                    logger.info("Downloaded block " + blockId + " from server (" + blockSize + " bytes)");
-                } else {
-                    logger.warning("Empty block received for " + blockId);
+        int retries = 0;
+        final int maxRetries = 3;
+        final long retryDelay = 1000; // 1 second
+        
+        while (retries < maxRetries) {
+            try (Socket socket = new Socket(serverAddress, serverPort);
+                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                 DataInputStream in = new DataInputStream(socket.getInputStream())) {
+                
+                out.writeUTF("BLOCK " + fileId + " " + blockId);
+                
+                String response = in.readUTF();
+                if (response.startsWith("DELEGATED")) {
+                    String[] parts = response.split(" ");
+                    String helperIp = parts[1];
+                    int helperPort = Integer.parseInt(parts[2]);
+                    String token = parts[3];
+                    
+                    logger.info("Delegated download received. Contacting helper...");
+                    downloadBlockFromHelper(helperIp, helperPort, token, blockId);
+                    return;
+                } 
+                else if (response.equals("OK")) {
+                    int blockSize = in.readInt();
+                    if (blockSize > 0) {
+                        byte[] blockData = new byte[blockSize];
+                        in.readFully(blockData);
+                        blocksReceived.put(blockId, blockData);
+                        logger.info("Downloaded block " + blockId + " (" + blockSize + " bytes)");
+                        return;
+                    } else {
+                        logger.warning("Empty block received for " + blockId);
+                        return;
+                    }
                 }
-            } else if (response.equals("FAILURE")) {
-                logger.warning("Server delegation failed, retrying block " + blockId);
-                retryDownloadBlock(blockId);
-                return;
-            } else {
-                logger.warning("Unknown server response: " + response);
+                
+            } catch (IOException e) {
+                logger.warning("Error downloading block " + blockId + " (attempt " + (retries+1) + "): " + e.getMessage());
             }
-
-        } catch (IOException e) {
-            logger.warning("Error downloading block " + blockId + ": " + e.getMessage());
+            
+            // Wait before retrying
+            try {
+                Thread.sleep(retryDelay);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+            retries++;
         }
+        
+        logger.severe("Failed to download block " + blockId + " after " + maxRetries + " retries.");
     }
 
     private void retryDownloadBlock(int blockId) {

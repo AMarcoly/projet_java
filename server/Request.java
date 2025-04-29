@@ -8,11 +8,13 @@ public class Request {
     private int blockId;
 
     public Request(Socket clientSocket) {
-        // Constructeur de base
+        this.clientSocket = clientSocket;
     }
 
     public Request(Socket clientSocket, String requestedFile, int blockId) {
-        // Constructeur complet
+        this.clientSocket = clientSocket;
+        this.requestedFile = requestedFile;
+        this.blockId = blockId;
     }
 
     public Socket getClientSocket() { return clientSocket; }
