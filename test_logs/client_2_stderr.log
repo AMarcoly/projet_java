@@ -1,0 +1,20 @@
+avr. 29, 2025 10:55:03 PM client.Client requestFileList
+INFOS: Available files: file1.txt
+avr. 29, 2025 10:55:07 PM client.Client downloadBlock
+INFOS: Downloaded block 0 (1024 bytes)
+avr. 29, 2025 10:55:07 PM client.Client downloadBlock
+AVERTISSEMENT: Error downloading block 1 (attempt 1): Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte
+avr. 29, 2025 10:55:08 PM client.Client downloadBlock
+INFOS: Downloaded block 1 (1024 bytes)
+avr. 29, 2025 10:55:08 PM client.Client connect
+INFOS: All downloads finished. Blocks received: 2
+avr. 29, 2025 10:55:09 PM client.Client assembleFile
+INFOS: File assembled. Total blocks: 2
+avr. 29, 2025 10:55:09 PM client.Client sendMD5
+INFOS: MD5 sent: a55fa882c6adadf5bdce6714035a9e76
+avr. 29, 2025 10:55:09 PM client.Client offerHelp
+INFOS: Client ready to help others as TrustedHelper on port 0
+avr. 29, 2025 10:55:09 PM client.TrustedHelper acceptDownloadRequests
+INFOS: Trusted Helper started on port: 62271
+avr. 29, 2025 10:55:09 PM client.Client registerAsHelper
+INFOS: Registered as TrustedHelper: 127.0.0.1:62271

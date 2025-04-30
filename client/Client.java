@@ -9,6 +9,10 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
 
+/**
+ * Client class responsible for connecting to a server to download a file in multiple blocks,
+ * verifying the file with MD5, and optionally acting as a trusted helper for other clients.
+ */
 public class Client {
     private static final String CLIENT_DIR = "./client_files/";
     private String serverAddress;
@@ -19,6 +23,14 @@ public class Client {
     private TrustedHelper trustedHelper;
     private Logger logger;
 
+    /**
+     * Constructs a Client instance with given server address, port, file ID, and number of connections.
+     *
+     * @param serverAddress IP address of the server
+     * @param serverPort Port number of the server
+     * @param fileId ID or name of the file to download
+     * @param Dc Number of parallel download connections
+     */
     public Client(String serverAddress, int serverPort, String fileId, int Dc) {
         this.logger = LoggerUtil.getLogger(Client.class);
         this.serverAddress = serverAddress;
@@ -28,7 +40,9 @@ public class Client {
         this.blocksReceived = new ConcurrentHashMap<>();
     }
 
-
+    /**
+     * Starts the file download process, assembles the file, sends MD5, and launches the helper.
+     */
     public void connect() {
         try {
             List<String> availableFiles = requestFileList();
@@ -57,6 +71,11 @@ public class Client {
         }
     }
 
+    /**
+     * Requests the list of available files from the server.
+     *
+     * @return List of file names available on the server
+     */
     private List<String> requestFileList() {
         try (Socket socket = new Socket(serverAddress, serverPort);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -73,6 +92,11 @@ public class Client {
         }
     }
 
+    /**
+     * Attempts to download a specific block with retries.
+     *
+     * @param blockId Block number to download
+     */
     private void downloadBlock(int blockId) {
         final int maxRetries = 3;
         for (int i = 0; i < maxRetries; i++) {
@@ -82,6 +106,12 @@ public class Client {
         logger.severe("Failed to download block " + blockId + " after " + maxRetries + " retries.");
     }
 
+    /**
+     * Tries to download a block either from server or helper.
+     *
+     * @param blockId Block number to download
+     * @return true if the block was successfully downloaded, false otherwise
+     */
     private boolean tryDownloadBlock(int blockId) {
         try (Socket socket = new Socket(serverAddress, serverPort);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -119,6 +149,14 @@ public class Client {
         return false;
     }
 
+    /**
+     * Downloads a block from a helper node.
+     *
+     * @param ip Helper IP address
+     * @param port Helper port
+     * @param token Authentication token
+     * @param blockId ID of the block to download
+     */
     private void downloadBlockFromHelper(String ip, int port, String token, int blockId) {
         try (Socket socket = new Socket(ip, port);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -142,6 +180,9 @@ public class Client {
         }
     }
 
+    /**
+     * Assembles all downloaded blocks into the final file on disk.
+     */
     private void assembleFile() {
         try {
             File outputDir = new File(CLIENT_DIR);
@@ -165,6 +206,9 @@ public class Client {
         }
     }
 
+    /**
+     * Computes and sends the MD5 hash of the assembled file to the server.
+     */
     private void sendMD5() {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -184,12 +228,13 @@ public class Client {
         }
     }
 
+    /**
+     * Starts a trusted helper to serve blocks to other clients and registers it on the server.
+     */
     private void startTrustedHelper() {
         this.trustedHelper = new TrustedHelper(0, 0.8);
         trustedHelper.start();
-        logger.info("Client ready to help others as TrustedHelper on port " + trustedHelper.getListeningPort());
 
-        // attente port attribué
         int attempts = 0;
         while (trustedHelper.getListeningPort() == 0 && attempts < 10) {
             try {
@@ -198,6 +243,8 @@ public class Client {
             } catch (InterruptedException ignored) {}
         }
 
+        logger.info("Client ready to help others as TrustedHelper on port " + trustedHelper.getListeningPort());
+
         if (trustedHelper.getListeningPort() != 0) {
             registerAsHelper();
         } else {
@@ -205,6 +252,9 @@ public class Client {
         }
     }
 
+    /**
+     * Registers the client as a helper on the server.
+     */
     private void registerAsHelper() {
         try (Socket socket = new Socket(serverAddress, serverPort);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream())) {
@@ -218,5 +268,32 @@ public class Client {
         } catch (IOException e) {
             logger.warning("Failed to register helper: " + e.getMessage());
         }
+    }
+
+    /**
+     * Entry point of the client program. Parses command-line arguments and starts the client.
+     *
+     * @param args Command-line arguments (e.g., --ip=..., --port=..., --file=..., --DC=...)
+     */
+    public static void main(String[] args) {
+        String ip = "127.0.0.1";
+        int port = 5000;
+        String fileName = "file1.txt";
+        int dc = 2;
+
+        for (String arg : args) {
+            if (arg.startsWith("--ip=")) {
+                ip = arg.substring("--ip=".length());
+            } else if (arg.startsWith("--port=")) {
+                port = Integer.parseInt(arg.substring("--port=".length()));
+            } else if (arg.startsWith("--file=")) {
+                fileName = arg.substring("--file=".length()).replace("\"", "");
+            } else if (arg.startsWith("--DC=")) {
+                dc = Integer.parseInt(arg.substring("--DC=".length()));
+            }
+        }
+
+        Client client = new Client(ip, port, fileName, dc);
+        client.connect();
     }
 }

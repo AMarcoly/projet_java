@@ -9,12 +9,21 @@ import java.nio.file.Files;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
 
+/**
+ * TestLauncher class that starts the server and performs a series of tests
+ * including utility verification, client-server communication, and delegation scenarios.
+ */
 public class TestLauncher {
 
     private static final Logger logger = LoggerUtil.getLogger(TestLauncher.class);
     private static final int PORT = 5000;
     private static final int CAPACITY = 4;
 
+    /**
+     * Main method to execute all test scenarios.
+     *
+     * @param args Not used
+     */
     public static void main(String[] args) {
         logger.info("=== Starting Tests ===");
 
@@ -39,6 +48,9 @@ public class TestLauncher {
         }
     }
 
+    /**
+     * Tests utility methods from the Utils class.
+     */
     private static void testUtils() {
         logger.info(">> Testing Utils");
 
@@ -46,18 +58,21 @@ public class TestLauncher {
         String expectedHex = "deadbeef";
         String resultHex = Utils.bytesToHex(example);
         logger.info("[bytesToHex] Expected: " + expectedHex + " - Result: " + resultHex);
-        logger.info(resultHex.equals(expectedHex) ? "✅ PASS" : "❌ FAIL");
+        logger.info(resultHex.equals(expectedHex) ? "\u2705 PASS" : "\u274C FAIL");
 
         String message = "Hello, world!";
         byte[] data = message.getBytes();
         String expectedMd5 = "6cd3556deb0da54bca060b4c39479839";
         String resultMd5 = Utils.computeMD5(data);
         logger.info("[computeMD5] Expected: " + expectedMd5 + " - Result: " + resultMd5);
-        logger.info(resultMd5.equals(expectedMd5) ? "✅ PASS" : "❌ FAIL");
+        logger.info(resultMd5.equals(expectedMd5) ? "\u2705 PASS" : "\u274C FAIL");
 
         logger.info("");
     }
 
+    /**
+     * Tests an end-to-end client-server interaction.
+     */
     private static void testServerAndClientEndToEnd() {
         logger.info(">> Testing End-to-End Server-Client");
 
@@ -72,13 +87,13 @@ public class TestLauncher {
             boolean success = clientResult.get(5, TimeUnit.MINUTES);
 
             if (success) {
-                logger.info("✅ End-to-End test passed: MD5 matches");
+                logger.info("\u2705 End-to-End test passed: MD5 matches");
             } else {
-                logger.warning("❌ End-to-End test failed: MD5 does not match");
+                logger.warning("\u274C End-to-End test failed: MD5 does not match");
             }
 
         } catch (Exception e) {
-            logger.severe("❌ End-to-End test error: " + e.getMessage());
+            logger.severe("\u274C End-to-End test error: " + e.getMessage());
         } finally {
             executor.shutdown();
         }
@@ -86,13 +101,16 @@ public class TestLauncher {
         logger.info("");
     }
 
+    /**
+     * Tests the delegation scenario with one helper and two clients.
+     * @throws InterruptedException If thread is interrupted during sleep
+     */
     private static void testDelegationScenario() throws InterruptedException {
         logger.info(">> Testing Delegation Scenario");
 
         ExecutorService executor = Executors.newFixedThreadPool(4);
 
         try {
-            // 1. Client helper
             executor.submit(() -> {
                 Client helper = new Client("127.0.0.1", PORT, "file1.txt", 2);
                 helper.connect();
@@ -100,7 +118,6 @@ public class TestLauncher {
 
             Thread.sleep(3000); // Laisser le helper s'enregistrer
 
-            // 2. Deux autres clients
             Future<Boolean> client1Result = executor.submit(() -> {
                 Client client1 = new Client("127.0.0.1", PORT, "file1.txt", 2);
                 client1.connect();
@@ -117,13 +134,13 @@ public class TestLauncher {
             boolean success2 = client2Result.get(5, TimeUnit.MINUTES);
 
             if (success1 && success2) {
-                logger.info("✅ Delegation Test Passed: All clients received correct files");
+                logger.info("\u2705 Delegation Test Passed: All clients received correct files");
             } else {
-                logger.warning("❌ Delegation Test Failed: At least one client has incorrect file");
+                logger.warning("\u274C Delegation Test Failed: At least one client has incorrect file");
             }
 
         } catch (Exception e) {
-            logger.severe("❌ Delegation Test Error: " + e.getMessage());
+            logger.severe("\u274C Delegation Test Error: " + e.getMessage());
         } finally {
             executor.shutdown();
             executor.awaitTermination(10, TimeUnit.SECONDS);
@@ -132,17 +149,30 @@ public class TestLauncher {
         logger.info("");
     }
 
+    /**
+     * Verifies that the downloaded file matches the original on the server by comparing MD5 hashes.
+     *
+     * @param fileName The file name to compare
+     * @return true if the hashes match; false otherwise
+     */
     private static boolean verifyDownload(String fileName) {
         return verifyDownload(fileName, "client_files");
     }
 
+    /**
+     * Verifies that the downloaded file matches the original in a given client folder.
+     *
+     * @param fileName The file name
+     * @param clientFolder The folder where the client saved the file
+     * @return true if MD5 hashes match
+     */
     private static boolean verifyDownload(String fileName, String clientFolder) {
         try {
             File serverFile = new File("./server_files/" + fileName);
             File clientFile = new File("./" + clientFolder + "/" + fileName);
 
             if (!serverFile.exists() || !clientFile.exists()) {
-                logger.warning("❌ Server or client file missing for comparison");
+                logger.warning("\u274C Server or client file missing for comparison");
                 return false;
             }
 
@@ -157,7 +187,7 @@ public class TestLauncher {
 
             return serverMd5.equals(clientMd5);
         } catch (IOException e) {
-            logger.severe("❌ Error during MD5 verification: " + e.getMessage());
+            logger.severe("\u274C Error during MD5 verification: " + e.getMessage());
             return false;
         }
     }

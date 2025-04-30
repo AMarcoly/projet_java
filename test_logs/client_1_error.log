@@ -1,0 +1,20 @@
+avr. 30, 2025 6:42:27 AM client.Client requestFileList
+INFOS: Available files: file1.txt;file2.txt
+avr. 30, 2025 6:42:29 AM client.Client tryDownloadBlock
+INFOS: Downloaded block 0 (1024 bytes)
+avr. 30, 2025 6:42:29 AM client.Client tryDownloadBlock
+INFOS: Downloaded block 1 (1024 bytes)
+avr. 30, 2025 6:42:29 AM client.Client connect
+INFOS: All downloads finished. Blocks received: 2
+avr. 30, 2025 6:42:29 AM client.Client assembleFile
+INFOS: File assembled successfully at: C:\Users\mishl\OneDrive\Bureau\Marco\Projet_Java_2025\.\client_files\file1.txt
+avr. 30, 2025 6:42:29 AM client.Client assembleFile
+INFOS: Number of blocks assembled: 2
+avr. 30, 2025 6:42:29 AM client.Client sendMD5
+INFOS: MD5 sent: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 6:42:29 AM client.TrustedHelper acceptDownloadRequests
+INFOS: Trusted Helper started on port: 64504
+avr. 30, 2025 6:42:29 AM client.Client startTrustedHelper
+INFOS: Client ready to help others as TrustedHelper on port 64504
+avr. 30, 2025 6:42:30 AM client.Client registerAsHelper
+INFOS: Registered as TrustedHelper: 127.0.0.1:64504

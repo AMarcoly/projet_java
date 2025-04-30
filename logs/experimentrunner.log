@@ -1,0 +1,10 @@
+avr. 30, 2025 7:28:01 AM ExperimentRunner runExperiments
+INFOS: Running trial 1 with 1 clients
+avr. 30, 2025 7:28:08 AM ExperimentRunner runExperiments
+INFOS: Running trial 2 with 1 clients
+avr. 30, 2025 7:33:09 AM ExperimentRunner runTrial
+GRAVE: Error during trial: null
+avr. 30, 2025 7:33:10 AM ExperimentRunner runExperiments
+INFOS: Running trial 3 with 1 clients
+avr. 30, 2025 7:33:18 AM ExperimentRunner runExperiments
+INFOS: Running trial 4 with 1 clients

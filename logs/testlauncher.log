@@ -1,0 +1,734 @@
+avr. 30, 2025 12:04:17 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 12:04:17 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 12:04:17 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 12:04:17 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 12:04:17 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 12:04:19 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:19 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:19 AM TestLauncher testServerAndClientEndToEnd
+INFOS: End-to-End test passed: MD5 matches
+avr. 30, 2025 12:04:19 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 12:04:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:04:24 AM TestLauncher testDelegationScenario
+INFOS: Delegation Test Passed: All clients received correct files
+avr. 30, 2025 12:04:24 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 12:06:25 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 12:06:25 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 12:06:25 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 12:06:26 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 12:06:26 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 12:06:27 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:06:27 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:06:27 AM TestLauncher testServerAndClientEndToEnd
+INFOS: End-to-End test passed: MD5 matches
+avr. 30, 2025 12:06:27 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 12:06:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:06:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: 823b417132909e689851a1a038a3d1fa
+avr. 30, 2025 12:06:34 AM TestLauncher testDelegationScenario
+GRAVE: Delegation Test Failed: At least one client has incorrect file
+avr. 30, 2025 12:06:34 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 12:06:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:06:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: 823b417132909e689851a1a038a3d1fa
+avr. 30, 2025 12:17:33 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 12:17:36 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 12:17:36 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 12:17:37 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 12:17:37 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 12:17:43 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:17:43 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:17:43 AM TestLauncher testServerAndClientEndToEnd
+INFOS: End-to-End test passed: MD5 matches
+avr. 30, 2025 12:17:43 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 12:17:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:17:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: d41d8cd98f00b204e9800998ecf8427e
+avr. 30, 2025 12:17:52 AM TestLauncher testDelegationScenario
+GRAVE: Delegation Test Failed: At least one client has incorrect file
+avr. 30, 2025 12:17:52 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 12:17:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:17:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: d41d8cd98f00b204e9800998ecf8427e
+avr. 30, 2025 12:43:18 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 12:43:19 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 12:43:19 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 12:43:19 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 12:43:21 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 12:43:21 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 12:43:21 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 12:43:21 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 12:43:23 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:43:23 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 12:43:23 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:11:03 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:11:04 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:11:04 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:11:04 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:11:04 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:11:04 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:11:04 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:11:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:11:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:11:06 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:17:49 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:17:51 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:17:53 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:17:53 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:17:55 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:17:55 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:17:55 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:17:59 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:17:59 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:17:59 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:21:37 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:21:38 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:21:43 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:21:44 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:21:44 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:21:44 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:21:44 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:21:44 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 1:28:21 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:28:23 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:28:23 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:28:23 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:28:23 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:28:24 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:28:24 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:28:24 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:28:25 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:25 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:25 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:28:25 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:28:25 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:28:31 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:31 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:31 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:31 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:28:31 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:28:32 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 1:31:17 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:31:18 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:31:18 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:31:19 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:19 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:19 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:31:19 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:31:19 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:31:23 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:23 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:24 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:31:24 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:31:24 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 1:42:25 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:42:26 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:42:26 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:42:26 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:42:27 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:42:27 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:42:27 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:42:27 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:42:29 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:29 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:29 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:42:30 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:42:30 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:42:35 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:35 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:36 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:36 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:42:36 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:42:36 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 1:51:27 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:51:29 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:51:29 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:51:30 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:30 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:30 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:51:30 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:51:30 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:51:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:34 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:35 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:35 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:51:35 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:51:35 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 1:58:13 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:58:14 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:58:14 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:58:15 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:15 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:15 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:58:15 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:58:15 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:58:18 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:18 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:18 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:18 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:58:18 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:58:18 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 1:59:36 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 1:59:37 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 1:59:37 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 1:59:37 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:59:38 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 1:59:38 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 1:59:38 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 1:59:38 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 1:59:39 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:39 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:39 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 1:59:39 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 1:59:39 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 1:59:42 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:42 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:42 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:42 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 1:59:42 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 1:59:42 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:00:51 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:00:53 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:00:53 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:00:55 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:00:55 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:00:55 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:00:55 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:00:55 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:00:59 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:00:59 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:01:00 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:01:00 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:01:00 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:01:00 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:01:59 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:02:01 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:02:01 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:02:02 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:02 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:02 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:02:02 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:02:02 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:02:05 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:05 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:02:06 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:02:06 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:11:04 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:11:05 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:11:05 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:11:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:06 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:06 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:11:07 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:11:07 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:11:10 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:10 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:10 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:10 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:11:10 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:11:10 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:12:42 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:12:43 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:12:43 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:12:43 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:12:44 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:12:44 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:12:44 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:12:44 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:12:46 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:46 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:46 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:12:47 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:12:47 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:12:51 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:51 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:52 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:12:52 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:12:52 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:18:44 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:18:45 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:18:45 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:18:45 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:18:46 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:18:46 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:18:46 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:18:46 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:18:48 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:48 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:48 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:18:48 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:18:48 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:18:54 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:54 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:55 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:55 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:18:55 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:18:55 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Signal Dispatcher - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-3 - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Attach Listener - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-0 - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Notification Thread - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-1 - State: TIMED_WAITING
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Common-Cleaner - State: TIMED_WAITING
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-4 - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: main - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-2 - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Finalizer - State: WAITING
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Thread-5 - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher lambda$main$0
+INFOS: Thread: Reference Handler - State: RUNNABLE
+avr. 30, 2025 2:18:58 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 2:19:52 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:19:53 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:19:53 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:19:54 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:54 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:54 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:19:54 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:19:54 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:19:57 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:57 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:58 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:58 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:19:58 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:19:58 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:20:01 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 2:48:56 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 2:48:57 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 2:48:57 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 2:48:58 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:48:58 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:48:58 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 2:48:59 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 2:48:59 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 2:49:04 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:49:04 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:49:04 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:49:04 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 2:49:04 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 2:49:04 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 2:49:08 AM TestLauncher main
+INFOS: === Tests Finished ===
+avr. 30, 2025 4:52:11 AM TestLauncher main
+INFOS: === Starting Tests ===
+avr. 30, 2025 4:52:12 AM TestLauncher testUtils
+INFOS: >> Testing Utils
+avr. 30, 2025 4:52:12 AM TestLauncher testUtils
+INFOS: [bytesToHex] Expected: deadbeef - Result: deadbeef
+avr. 30, 2025 4:52:12 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 4:52:13 AM TestLauncher testUtils
+INFOS: [computeMD5] Expected: 6cd3556deb0da54bca060b4c39479839 - Result: 6cd3556deb0da54bca060b4c39479839
+avr. 30, 2025 4:52:13 AM TestLauncher testUtils
+INFOS: ✅ PASS
+avr. 30, 2025 4:52:13 AM TestLauncher testUtils
+INFOS: 
+avr. 30, 2025 4:52:13 AM TestLauncher testServerAndClientEndToEnd
+INFOS: >> Testing End-to-End Server-Client
+avr. 30, 2025 4:52:14 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:14 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:14 AM TestLauncher testServerAndClientEndToEnd
+INFOS: ✅ End-to-End test passed: MD5 matches
+avr. 30, 2025 4:52:14 AM TestLauncher testServerAndClientEndToEnd
+INFOS: 
+avr. 30, 2025 4:52:14 AM TestLauncher testDelegationScenario
+INFOS: >> Testing Delegation Scenario
+avr. 30, 2025 4:52:20 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:20 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:20 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Server MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:20 AM TestLauncher verifyDownload
+INFOS: [MD5 Check] Client MD5: a55fa882c6adadf5bdce6714035a9e76
+avr. 30, 2025 4:52:20 AM TestLauncher testDelegationScenario
+INFOS: ✅ Delegation Test Passed: All clients received correct files
+avr. 30, 2025 4:52:20 AM TestLauncher testDelegationScenario
+INFOS: 
+avr. 30, 2025 4:52:23 AM TestLauncher main
+INFOS: === Tests Finished ===

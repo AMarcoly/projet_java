@@ -1,0 +1,32 @@
+avr. 30, 2025 6:42:27 AM client.Client requestFileList
+INFOS: Available files: file1.txt;file2.txt
+avr. 30, 2025 6:42:41 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 1: Connection reset
+avr. 30, 2025 6:42:41 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 0: Connection reset
+avr. 30, 2025 6:42:41 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 1: Connection refused: connect
+avr. 30, 2025 6:42:41 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 0: Connection refused: connect
+avr. 30, 2025 6:42:42 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 1: Connection refused: connect
+avr. 30, 2025 6:42:42 AM client.Client tryDownloadBlock
+AVERTISSEMENT: Error downloading block 0: Connection refused: connect
+avr. 30, 2025 6:42:43 AM client.Client downloadBlock
+GRAVE: Failed to download block 0 after 3 retries.
+avr. 30, 2025 6:42:43 AM client.Client downloadBlock
+GRAVE: Failed to download block 1 after 3 retries.
+avr. 30, 2025 6:42:43 AM client.Client connect
+INFOS: All downloads finished. Blocks received: 0
+avr. 30, 2025 6:42:43 AM client.Client assembleFile
+INFOS: File assembled successfully at: C:\Users\mishl\OneDrive\Bureau\Marco\Projet_Java_2025\.\client_files\file1.txt
+avr. 30, 2025 6:42:43 AM client.Client assembleFile
+INFOS: Number of blocks assembled: 0
+avr. 30, 2025 6:42:43 AM client.Client sendMD5
+GRAVE: Error computing or sending MD5: Connection refused: connect
+avr. 30, 2025 6:42:43 AM client.TrustedHelper acceptDownloadRequests
+INFOS: Trusted Helper started on port: 64524
+avr. 30, 2025 6:42:43 AM client.Client startTrustedHelper
+INFOS: Client ready to help others as TrustedHelper on port 64524
+avr. 30, 2025 6:42:43 AM client.Client registerAsHelper
+AVERTISSEMENT: Failed to register helper: Connection refused: connect

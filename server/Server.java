@@ -101,9 +101,11 @@ public class Server {
                 handleHelperRegistration(request);
             }
 
-        } catch (IOException e) {
-            logger.warning("Error handling client request: " + e.getMessage());
-        } finally {
+        }catch (IOException e) {
+            logger.warning("Error handling client request from " + 
+            (clientSocket != null ? clientSocket.getInetAddress() : "unknown") + 
+            ": " + (e.getMessage() != null ? e.getMessage() : "Connection reset"));
+        }finally {
             try {
                 clientSocket.close();
             } catch (IOException ignore) {}
@@ -219,6 +221,10 @@ public class Server {
     }
 
     private boolean tryDelegateRequest(Request request) {
+        if (request == null || request.getRequestedFile() == null) {
+            logger.warning("Invalid delegation request - no file specified");
+            return false;
+        }
         List<ClientInfo> helpers = trustedClients.getOrDefault(request.getRequestedFile(), List.of());
         for (ClientInfo helper : helpers) {
             if (contactTrustedClient(helper, request)) {
@@ -249,4 +255,21 @@ public class Server {
         }
         return false;
     }
+
+    public static void main(String[] args) {
+        int port = 5000;
+        int capacity = 2;
+    
+        for (String arg : args) {
+            if (arg.startsWith("--port=")) {
+                port = Integer.parseInt(arg.substring("--port=".length()));
+            } else if (arg.startsWith("--capacity=")) {
+                capacity = Integer.parseInt(arg.substring("--capacity=".length()));
+            }
+        }
+    
+        Server server = new Server(port, capacity); // tu peux adapter 2 à un paramètre si tu veux
+        server.start();
+    }
+    
 }
